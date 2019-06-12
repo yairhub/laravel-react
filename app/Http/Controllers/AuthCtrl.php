@@ -53,6 +53,7 @@ class AuthCtrl extends Controller
     private function logout(Request $request) {
         $token = $request->bearerToken();
         $token->revoke();
+        
     
         $response = 'You have been succesfully logged out!';
         return response($response, 200);
