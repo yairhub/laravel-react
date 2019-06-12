@@ -15,6 +15,7 @@ class Cities extends Component {
         columns: [],
       }
       
+      
       async componentDidMount (){
           try{
               const data = await getCities();
