@@ -1,11 +1,17 @@
 <?php
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use Lcobucci\JWT\Parser;
+use DB;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Laravel\Passport\Passport;
+
 use App\User; //  <--
-use Illuminate\Support\Facades\Auth;
+
  // <--
 class AuthCtrl extends Controller
 {
@@ -21,7 +27,6 @@ class AuthCtrl extends Controller
         {
             return response(['errors'=>$validator->errors()->all()], 422);
         }
-    
         $request['password'] = Hash::make($request['password']);
         $user = User::create($request->toArray());
     
@@ -50,13 +55,20 @@ class AuthCtrl extends Controller
         }
 
     }
-    private function logout(Request $request) {
-        $token = $request->bearerToken();
-        $token->revoke();
-        
-    
-        $response = 'You have been succesfully logged out!';
-        return response($response, 200);
 
+    public function logout(Request $request) {
+        $value = $request->bearerToken();
+        if ($value) {
+            $id = (new Parser())->parse($value)->getHeader('jti');
+            DB::table('oauth_access_tokens')->where('id', '=', $id)->update(['revoked' => 1]);
+            DB::table('oauth_access_tokens')->where(['revoked' => 1])->delete();
+            $response = 'You are successfully logged out';
+            return response($response,200);
+        }else{
+            $response = 'no bearer token provided';
+            return response($response,422);
+            
+        }
+        
     }
 }

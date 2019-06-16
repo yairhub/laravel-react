@@ -12,12 +12,13 @@ import { toast } from 'react-toastify';
 class Cities extends Component {
       state = {
         data: [],
-        columns: [],
+        columns: []
       }
       
       
       async componentDidMount (){
           try{
+            
               const data = await getCities();
               this.setState({data});
               const columns = Object.keys(data[0]); 
@@ -42,6 +43,7 @@ class Cities extends Component {
     }
    
     render() { 
+        const {user} = this.props
         const {data,columns} = this.state;
         const citiesAmount = Object.keys(data).length;
 
@@ -49,19 +51,22 @@ class Cities extends Component {
             <div>
                 <h1>Cities</h1>
                 <p>there are {citiesAmount} cities to show</p>
-
+                { user &&
                 <Link 
                  to='cities/new' 
                  className="btn btn-success btn-sm my-2"
                  name='New' >New Citiy
                  </Link> 
+                }
 
                 <table className="table">
                     <TableHead 
                     columns={columns} 
                     exColumns={{remove:'',edit:''}}
+                    user={user}
                     />
-                    <TableBody  
+                    <TableBody 
+                    user={user} 
                     data={data} 
                     onDel={this.handleDelete}
                     />

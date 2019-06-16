@@ -18,13 +18,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('cities','CitieController@index');
 Route::post('cities','CitieController@store');
-Route::post('login', 'AuthCtrl@login');
+// Route::post('login', 'AuthCtrl@login');
+Route::post('login', [ 'as' => 'login', 'uses' => 'AuthCtrl@login']);
 Route::post('register', 'AuthCtrl@register');
 Route::get('cities/{id}','CitieController@show');
 Route::put('cities/{id}','CitieController@update');
 Route::delete('cities/{id}','CitieController@delete');
 
 //  Route::get('logout','AuthCtrl@logout');
-Route::middleware('auth:api')->group(function () {
-    Route::get('logout', 'AuthCtrl@logout');
-});
+// Route::middleware('auth:api')->group(function () {
+    Route::get('/logout', 'AuthCtrl@logout');
+// });
+        // Route::get('/logout', 'AuthCtrl@logout');

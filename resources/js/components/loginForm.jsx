@@ -27,9 +27,11 @@ class LoginForm extends Component {
         const {user} = this.state
         const errors = validate(user,this.schema);
         this.setState({errors :errors || {}});
-        await login(user);
+        const result = login(user);
+        result.then((value) => {
+          if(value === "success") window.location = '/';
+        });
         
-        window.location = '/';
     }
     handleChange = ({currentTarget: input})=> {
         const errorMessage = validateProperty(input,this.schema);
@@ -57,7 +59,7 @@ class LoginForm extends Component {
                      onChange={this.handleChange}/>
                     )}
                    
-                    <Button btnColor="btn-success" name="register"/>
+                    <Button btnColor="btn-success" name="Login"/>
                 </form>   
             </div>
          );

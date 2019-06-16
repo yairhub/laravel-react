@@ -37,3 +37,4 @@ export function validateProperty({name,value},sch){
   const {error} = Joi.validate(obj,schema);
   return error ? error.details[0].message : null;      
 }
+

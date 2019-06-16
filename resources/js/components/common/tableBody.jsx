@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-const TableBody = ({data,onDel}) => {
+const TableBody = ({data,onDel,user}) => {
   return (
     <tbody>
     {data.map(item=> 
@@ -8,6 +8,8 @@ const TableBody = ({data,onDel}) => {
       {Object.keys(item).map(cell => 
         <td key={cell}>{item[cell]}</td>
        )}
+      {user && 
+      <React.Fragment>
        <td>
             <Link 
             to={`/cities/${item.id}`}
@@ -15,7 +17,7 @@ const TableBody = ({data,onDel}) => {
             name='Edit'                        
             // currentId={citie.id}
             >Edit</Link>
-
+            
         </td>
         <td>
             <button 
@@ -24,6 +26,8 @@ const TableBody = ({data,onDel}) => {
              Delete
             </button>
         </td>
+        </React.Fragment>
+      }
     </tr>)}
     </tbody>
   ) 

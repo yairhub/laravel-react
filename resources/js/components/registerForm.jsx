@@ -4,7 +4,7 @@ import Joi from 'joi-browser';
 import Input from './common/input';
 import Button from './common/button';
 import {register} from './services/authService';
-import {mapToUserModel,validate,validateProperty} from './utils';
+import {mapToUserModel,validate,validateProperty,handleInputChange} from './utils';
 
 
 class RegisterForm extends Component {
@@ -29,9 +29,12 @@ class RegisterForm extends Component {
         const errors = validate(user,this.schema);
         this.setState({errors :errors || {}});
         const obj = mapToUserModel(user);
-        await register(obj);
-        return window.location = '/login';
+        const result = register(obj);
+        result.then(value => {
+          if(value === "success") window.location = '/login';
+        });
     }
+
     handleChange = ({currentTarget: input})=> {
         const errorMessage = validateProperty(input,this.schema);
         const errors = {...this.state.errors};
@@ -58,7 +61,7 @@ class RegisterForm extends Component {
                      onChange={this.handleChange}/>
                     )}
                    
-                    <Button btnColor="btn-success" name="register"/>
+                    <Button btnColor="btn-success" name="Register"/>
                 </form>   
             </div>
          );

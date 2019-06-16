@@ -2,7 +2,7 @@ import React,{Component} from "react";
 import {NavLink} from 'react-router-dom';
 
 const Header = ({user}) => {
-  console.log(user);
+  // console.log(user);
   return ( 
       
       <ul className="nav nav-tabs">

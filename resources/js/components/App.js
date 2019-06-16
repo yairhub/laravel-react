@@ -31,9 +31,9 @@ class App extends Component {
               <div className="container">
                 <Switch>
                 <Route path={"/cities/:id"} component={CitieForm}/>
-                <Route path={"/cities"} component={Cities}/>
+                <Route path={"/cities"}  render={(props) => <Cities {...props} user={user}/>}/>
                 <Route path={"/login"} component={LoginForm}/>
-                <Route path={"/logout"} component={Logout}/>
+                <Route path={"/logout"}  component={Logout} />
                 <Route path={"/register"} component={RegisterForm}/>
                 <Route exact path="/" render={() => (
                    <Redirect to="/cities"/>
