@@ -2,10 +2,10 @@ import Joi from 'joi-browser';
 export function mapToModel(dataState){
   const data = {...dataState};
   const obj = {
-        name: data.Name,
-        countrycode: data.CountryCode,
-        district: data.District,
-        population: data.Population
+        name: data.name,
+        description: data.description,
+        genre: data.genre,
+        rating: data.rating
     }  
     return obj;
 }

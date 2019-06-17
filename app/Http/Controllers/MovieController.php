@@ -3,32 +3,32 @@ namespace App\Http\Controllers;
 use DB;
 use Illuminate\Http\Request;
 use App\Htpp\Requests;
-use App\Citie;
-use App\Http\Resources\Citie as CitieResource;
+use App\Movie;
+use App\Http\Resources\Movie as MovieResource;
 
-class CitieController extends Controller{
+class MovieController extends Controller{
 
     public function index(){
-       return  DB::table('cities')->orderby('id','desc')->get()->take(10);
+       return  DB::table('movies')->orderby('id','desc')->get();
     }
     public function show($id){
-      return Citie::find($id);
+      return Movie::find($id);
     }
     public function store(Request $request){ 
-       return new CitieResource(Citie::newCity($request));  
+       return new MovieResource(Movie::newCity($request));  
     }
    public function update(Request $request, $id){
     //  return  $id;
     if(is_numeric($id)){
-      return Citie::updateCity($request,$id); 
+      return Movie::updateCity($request,$id); 
      }
    }
 
    public function delete($id){
    if(is_numeric($id)){
-     $citie = Citie::findOrFail($id);
-     $citie->delete();
-     return Citie::all(); 
+     $Movie = Movie::findOrFail($id);
+     $Movie->delete();
+     return Movie::all(); 
     }else{
         return "no valid id";
     }

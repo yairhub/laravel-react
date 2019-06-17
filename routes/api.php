@@ -16,14 +16,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('cities','CitieController@index');
-Route::post('cities','CitieController@store');
+Route::get('movies','MovieController@index');
+Route::post('movies','MovieController@store');
 // Route::post('login', 'AuthCtrl@login');
 Route::post('login', [ 'as' => 'login', 'uses' => 'AuthCtrl@login']);
 Route::post('register', 'AuthCtrl@register');
-Route::get('cities/{id}','CitieController@show');
-Route::put('cities/{id}','CitieController@update');
-Route::delete('cities/{id}','CitieController@delete');
+Route::get('movies/{id}','MovieController@show');
+Route::put('movies/{id}','MovieController@update');
+Route::delete('movies/{id}','MovieController@delete');
 
 //  Route::get('logout','AuthCtrl@logout');
 // Route::middleware('auth:api')->group(function () {

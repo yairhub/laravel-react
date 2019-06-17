@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Citie extends JsonResource
+class movie extends JsonResource
 {
 
     /**
@@ -16,10 +16,10 @@ class Citie extends JsonResource
     public function toArray($request)
     {
         return [
-            'Name' => $this->name,
-            'CountryCode' => $this->countrycode,
-            'District' => $this->district,
-            'Population' => $this->population
+            'name' => $this->name,
+            'description' => $this->description,
+            'genre' => $this->genre,
+            'rating' => $this->rating
         ];
     }
 }

@@ -3,8 +3,8 @@ import {Link} from 'react-router-dom';
 const TableBody = ({data,onDel,user}) => {
   return (
     <tbody>
-    {data.map(item=> 
-    <tr key={item.Name}>
+    {data && data.map(item=> 
+    <tr key={item.name}>
       {Object.keys(item).map(cell => 
         <td key={cell}>{item[cell]}</td>
        )}
@@ -12,7 +12,7 @@ const TableBody = ({data,onDel,user}) => {
       <React.Fragment>
        <td>
             <Link 
-            to={`/cities/${item.id}`}
+            to={`/movies/${item.id}`}
             className="btn btn-success btn-sm"
             name='Edit'                        
             // currentId={citie.id}

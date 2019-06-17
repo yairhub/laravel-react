@@ -4,10 +4,10 @@ import {BrowserRouter,Route,Switch,Redirect} from 'react-router-dom';
 import {ToastContainer} from 'react-toastify';
 
 import Header from './header';
-import Cities from './cities';
+import Movies from './movies';
 import LoginForm from './loginForm';
 import RegisterForm from './registerForm';
-import CitieForm from './citieForm';
+import MovieForm from './movieForm';
 import Logout from './logout';
  
 import {getCurrentUser} from './services/authService';
@@ -30,25 +30,14 @@ class App extends Component {
               <ToastContainer/>
               <div className="container">
                 <Switch>
-                <Route path={"/cities/:id"} component={CitieForm}/>
-                <Route path={"/cities"}  render={(props) => <Cities {...props} user={user}/>}/>
+                <Route path={"/movies/:id"} component={MovieForm}/>
+                <Route path={"/movies"}  render={(props) => <Movies {...props} user={user}/>}/>
                 <Route path={"/login"} component={LoginForm}/>
                 <Route path={"/logout"}  component={Logout} />
                 <Route path={"/register"} component={RegisterForm}/>
                 <Route exact path="/" render={() => (
-                   <Redirect to="/cities"/>
-                )}/>
-           
-      
-                {/* <Redirect  from={"/"} to="/cities"/> */}
-                {/* // <Route path="/products/:id" component={ProductDetails}/>
-                // <Route path="/products" render={(props) => <Products sortBy="newest" {...props}/>}/>
-                // <Route path="/posts/:year?/:month?" component={Posts}/>
-                //<Route path="/" exact component={Cities}/>
-                // <Redirect to="/not-found"/>
-                // <Route path="/not-found" component={NotFound}/>
-                // <Route path="/" exact component={Home}/> */}
-                
+                   <Redirect to="/movies"/>
+                )}/>     
                 </Switch>
               </div>
             </div>

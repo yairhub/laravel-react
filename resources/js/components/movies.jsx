@@ -3,13 +3,13 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 import TableBody from './common/tableBody';
 import TableHead from './common/tableHead';
-import {getCities,deleteCitie} from './services/citieService';
+import {getMovies,deleteMovie} from './services/movieService';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { toast } from 'react-toastify';
 
 
 
-class Cities extends Component {
+class Movies extends Component {
       state = {
         data: [],
         columns: []
@@ -18,10 +18,9 @@ class Cities extends Component {
       
       async componentDidMount (){
           try{
-            
-              const data = await getCities();
+              const data = await getMovies();
               this.setState({data});
-              const columns = Object.keys(data[0]); 
+              const columns = Object.keys(data[0]);
               this.setState({columns});
           }
           catch(err){
@@ -29,11 +28,11 @@ class Cities extends Component {
           }
     }
   
-    handleDelete = async (citie) =>{
+    handleDelete = async (movie) =>{
         try{
-            await deleteCitie(citie.id);
+            await deleteMovie(movie.id);
             const data = [...this.state.data];
-            const index = data.indexOf(citie);
+            const index = data.indexOf(movie);
             data.splice(index, 1);
             this.setState({data});
         }catch(err){
@@ -45,17 +44,17 @@ class Cities extends Component {
     render() { 
         const {user} = this.props
         const {data,columns} = this.state;
-        const citiesAmount = Object.keys(data).length;
+        const moviesAmount = Object.keys(data).length;
 
         return (
             <div>
-                <h1>Cities</h1>
-                <p>there are {citiesAmount} cities to show</p>
+                <h1>Movies</h1>
+                <p>there are {moviesAmount} movies to show</p>
                 { user &&
                 <Link 
-                 to='cities/new' 
+                 to='movies/new' 
                  className="btn btn-success btn-sm my-2"
-                 name='New' >New Citiy
+                 name='New' >New Movie
                  </Link> 
                 }
 
@@ -77,4 +76,4 @@ class Cities extends Component {
     }
 }
  
-export default Cities;
+export default Movies;

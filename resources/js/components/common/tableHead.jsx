@@ -6,7 +6,9 @@ const TableHead = ({columns,titles={edit:'',remove:''},user}) => {
         <thead className="thead-light">
             <tr>
                 {columns.map(column => 
-                    <th key={column} scope="col">{column}</th>
+                    <th key={column} scope="col">
+                    {column.charAt(0).toUpperCase() + column.slice(1)}
+                    </th>
                 )}
                 
                 {user && 

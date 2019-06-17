@@ -7,7 +7,7 @@ const Header = ({user}) => {
       
       <ul className="nav nav-tabs">
         <li className="nav-item">
-          <NavLink className="nav-link" to="/cities">cities</NavLink>
+          <NavLink className="nav-link" to="/movies">Movies</NavLink>
         </li>
        
        {
